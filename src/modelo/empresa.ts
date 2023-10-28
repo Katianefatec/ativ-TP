@@ -11,13 +11,13 @@ export default class Empresa{
         this.produtos = []
         this.servicos = []
     }
-    public get getClientes(){
+    public get getClientes(): Array <Cliente>{
         return this.clientes
     }
-    public get getProdutos(){
+    public get getProdutos(): Array<Produto>{
         return this.produtos
     }
-    public get getServicos(){
+    public get getServicos(): Array<Servico>{
         return this.servicos
     }
 }

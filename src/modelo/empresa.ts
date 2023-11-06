@@ -20,4 +20,5 @@ export default class Empresa{
     public get getServicos(): Array<Servico>{
         return this.servicos
     }
+    
 }

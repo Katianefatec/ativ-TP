@@ -13,6 +13,9 @@ var compra_1 = __importDefault(require("../negocio/compra"));
 console.log("Bem-vindo ao cadastro de clientes do Grupo World Beauty");
 var empresa = new empresa_1.default();
 var execucao = true;
+var listagemProdutos = new listagemProdutos_1.default(produtosCadastrados_1.default);
+var listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
+var cadastro = new cadastroCliente_1.default(listagemClientes);
 while (execucao) {
     console.log("Op\u00E7\u00F5es:");
     console.log("1 - Cadastrar cliente");
@@ -26,20 +29,18 @@ while (execucao) {
     console.log("9 - Listar 5 clientes que mais consumiram em valor");
     console.log("10 - Listar clientes por g\u00EAnero");
     console.log("11 - Listar produtos mais consumidos por g\u00EAnero");
+    console.log("12 - Atualizar cliente");
+    console.log("13 - Deletar cliente");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
-    var listagemProdutos = new listagemProdutos_1.default(produtosCadastrados_1.default);
-    var listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
     var opcaoGenero = void 0;
     var genero = void 0;
     switch (opcao) {
         case 1:
-            var cadastro = new cadastroCliente_1.default(empresa.getClientes);
             cadastro.cadastrar();
             break;
         case 2:
-            listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
             listagemClientes.listar();
             break;
         case 3:
@@ -52,7 +53,6 @@ while (execucao) {
             listagemProdutos.listarProdutosEServicos();
             break;
         case 6:
-            listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
             listagemClientes.listarTop10Clientes();
             break;
         case 7:

@@ -9,6 +9,9 @@ import compras from '../negocio/compra';
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
 let empresa = new Empresa()
 let execucao = true
+let listagemProdutos = new ListagemProdutos(produtoscadastrados);
+let listagemClientes = new ListagemClientes(empresa.getClientes, compras);
+let cadastro = new CadastroCliente(listagemClientes);
 
 while (execucao) {
     console.log(`Opções:`);
@@ -23,26 +26,25 @@ while (execucao) {
     console.log(`9 - Listar 5 clientes que mais consumiram em valor`);
     console.log(`10 - Listar clientes por gênero`);
     console.log(`11 - Listar produtos mais consumidos por gênero`);
+    console.log(`12 - Atualizar cliente`);
+    console.log(`13 - Deletar cliente`);
     
       
     console.log(`0 - Sair`);
 
     let entrada = new Entrada()
     let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
-    let listagemProdutos = new ListagemProdutos(produtoscadastrados);
-    let listagemClientes = new ListagemClientes(empresa.getClientes, compras);
     let opcaoGenero: number;
     let genero: string;
+    
     
     
 
     switch (opcao) {
         case 1:
-            let cadastro = new CadastroCliente(empresa.getClientes)
             cadastro.cadastrar()
             break;
         case 2:
-            listagemClientes = new ListagemClientes(empresa.getClientes, compras);
             listagemClientes.listar()
             break;
         case 3: 
@@ -56,7 +58,6 @@ while (execucao) {
             break;
             
         case 6:
-            listagemClientes = new ListagemClientes(empresa.getClientes, compras);
             listagemClientes.listarTop10Clientes();
             break;   
         case 7:

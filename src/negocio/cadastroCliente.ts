@@ -2,14 +2,17 @@ import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
 import Cadastro from "./cadastro";
+import clientescadastrados from "./clientesCadastrados";
+import ListagemClientes from '../negocio/listagemClientes';
 
 export default class CadastroCliente extends Cadastro {
-    private clientes: Array<Cliente>
     private entrada: Entrada
-    constructor(clientes: Array<Cliente>) {
+    private listagemClientes : ListagemClientes
+
+    constructor(listagemClientes: ListagemClientes) {
         super()
-        this.clientes = clientes
         this.entrada = new Entrada()
+        this.listagemClientes = listagemClientes;
     }
     public cadastrar(): void {
         console.log(`\nInício do cadastro do cliente`);
@@ -27,7 +30,7 @@ export default class CadastroCliente extends Cadastro {
         let dataEmissao = new Date(ano, mes, dia)
         let cpf = new CPF(valor, dataEmissao);
         let cliente = new Cliente(nome, nomeSocial, cpf, genero);
-        this.clientes.push(cliente)
+        this.listagemClientes.adicionarCliente(cliente);        
         console.log(`\nCadastro concluído :)\n`);
     }
 }

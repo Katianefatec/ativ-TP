@@ -70,6 +70,26 @@ var Cliente = /** @class */ (function () {
         this.servicosConsumidos.push(servico);
         this.quantidadeConsumida++;
     };
+    Cliente.prototype.atualizarCliente = function (nome, nomeSocial, cpf, genero) {
+        this.nome = nome;
+        this.nomeSocial = nomeSocial;
+        this.cpf = cpf;
+        this.genero = genero;
+    };
+    Cliente.prototype.deletarProdutoConsumido = function (produto) {
+        var index = this.produtosConsumidos.indexOf(produto);
+        if (index > -1) {
+            this.produtosConsumidos.splice(index, 1);
+            this.quantidadeConsumida--;
+        }
+    };
+    Cliente.prototype.deletarServicoConsumido = function (servico) {
+        var index = this.servicosConsumidos.indexOf(servico);
+        if (index > -1) {
+            this.servicosConsumidos.splice(index, 1);
+            this.quantidadeConsumida--;
+        }
+    };
     return Cliente;
 }());
 exports.default = Cliente;

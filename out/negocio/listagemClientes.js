@@ -143,6 +143,21 @@ var ListagemClientes = /** @class */ (function (_super) {
             console.log("Produto: ".concat(produto, ", Quantidade: ").concat(contagem));
         });
     };
+    ListagemClientes.prototype.atualizarCliente = function (clienteAntigo, clienteNovo) {
+        var index = this.clientes.indexOf(clienteAntigo);
+        if (index > -1) {
+            this.clientes[index] = clienteNovo;
+        }
+    };
+    ListagemClientes.prototype.deletarCliente = function (cliente) {
+        var index = this.clientes.indexOf(cliente);
+        if (index > -1) {
+            this.clientes.splice(index, 1);
+        }
+    };
+    ListagemClientes.prototype.adicionarCliente = function (cliente) {
+        this.clientes.push(cliente);
+    };
     return ListagemClientes;
 }(listagem_1.default));
 exports.default = ListagemClientes;

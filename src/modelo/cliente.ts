@@ -56,6 +56,29 @@ export default class Cliente {
         this.servicosConsumidos.push(servico);
         this.quantidadeConsumida++;
     }
+
+    public atualizarCliente(nome: string, nomeSocial: string, cpf: CPF, genero: string): void {
+        this.nome = nome;
+        this.nomeSocial = nomeSocial;
+        this.cpf = cpf;
+        this.genero = genero;
+    }
+
+    public deletarProdutoConsumido(produto: Produto): void {
+        const index = this.produtosConsumidos.indexOf(produto);
+        if (index > -1) {
+            this.produtosConsumidos.splice(index, 1);
+            this.quantidadeConsumida--;
+        }
+    }
+
+    public deletarServicoConsumido(servico: Servico): void {
+        const index = this.servicosConsumidos.indexOf(servico);
+        if (index > -1) {
+            this.servicosConsumidos.splice(index, 1);
+            this.quantidadeConsumida--;
+        }
+    }
     
 }
 

@@ -144,6 +144,25 @@ export default class ListagemClientes extends Listagem {
             console.log(`Produto: ${produto}, Quantidade: ${contagem}`);
         });
     }
+
+    public atualizarCliente(clienteAntigo: Cliente, clienteNovo: Cliente): void {
+        const index = this.clientes.indexOf(clienteAntigo);
+        if (index > -1) {
+            this.clientes[index] = clienteNovo;
+        }
+    }
+
+    public deletarCliente(cliente: Cliente): void {
+        const index = this.clientes.indexOf(cliente);
+        if (index > -1) {
+            this.clientes.splice(index, 1);
+        }
+    }
+    
+    public adicionarCliente(cliente: Cliente): void {
+        this.clientes.push(cliente);
+    }    
 }
+
 
     

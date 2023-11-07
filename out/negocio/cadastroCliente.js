@@ -24,10 +24,10 @@ var cpf_1 = __importDefault(require("../modelo/cpf"));
 var cadastro_1 = __importDefault(require("./cadastro"));
 var CadastroCliente = /** @class */ (function (_super) {
     __extends(CadastroCliente, _super);
-    function CadastroCliente(clientes) {
+    function CadastroCliente(listagemClientes) {
         var _this = _super.call(this) || this;
-        _this.clientes = clientes;
         _this.entrada = new entrada_1.default();
+        _this.listagemClientes = listagemClientes;
         return _this;
     }
     CadastroCliente.prototype.cadastrar = function () {
@@ -47,16 +47,8 @@ var CadastroCliente = /** @class */ (function (_super) {
         var dataEmissao = new Date(ano, mes, dia);
         var cpf = new cpf_1.default(valor, dataEmissao);
         var cliente = new cliente_1.default(nome, nomeSocial, cpf, genero);
-        this.clientes.push(cliente);
+        this.listagemClientes.adicionarCliente(cliente);
         console.log("\nCadastro conclu\u00EDdo :)\n");
-        this.listarClientes();
-    };
-    CadastroCliente.prototype.listarClientes = function () {
-        console.log("\nListagem de clientes:");
-        this.clientes.forEach(function (cliente, index) {
-            console.log("Cliente ".concat(index + 1, ": ").concat(cliente.nome));
-        });
-        console.log("\n");
     };
     return CadastroCliente;
 }(cadastro_1.default));

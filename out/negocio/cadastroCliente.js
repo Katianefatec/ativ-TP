@@ -36,7 +36,10 @@ var CadastroCliente = /** @class */ (function (_super) {
         var nomeSocial = this.entrada.receberTexto("Por favor informe o nome social do cliente: ");
         var valor = this.entrada.receberTexto("Por favor informe o n\u00FAmero do cpf: ");
         var data = this.entrada.receberTexto("Por favor informe a data de emiss\u00E3o do cpf, no padr\u00E3o dd/mm/yyyy: ");
-        var genero = this.entrada.receberTexto("Por favor informe o g\u00EAnero do cliente: ");
+        var genero = '';
+        while (genero !== '1' && genero !== '2') {
+            genero = this.entrada.receberTexto("Por favor informe o g\u00EAnero do cliente (1 - Masculino, 2 - Feminino): ");
+        }
         var partesData = data.split('/');
         var ano = new Number(partesData[2].valueOf()).valueOf();
         var mes = new Number(partesData[1].valueOf()).valueOf();
@@ -46,6 +49,14 @@ var CadastroCliente = /** @class */ (function (_super) {
         var cliente = new cliente_1.default(nome, nomeSocial, cpf, genero);
         this.clientes.push(cliente);
         console.log("\nCadastro conclu\u00EDdo :)\n");
+        this.listarClientes();
+    };
+    CadastroCliente.prototype.listarClientes = function () {
+        console.log("\nListagem de clientes:");
+        this.clientes.forEach(function (cliente, index) {
+            console.log("Cliente ".concat(index + 1, ": ").concat(cliente.nome));
+        });
+        console.log("\n");
     };
     return CadastroCliente;
 }(cadastro_1.default));

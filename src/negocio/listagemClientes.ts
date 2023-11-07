@@ -121,11 +121,18 @@ export default class ListagemClientes extends Listagem {
         let clientesDoGenero = this.clientes.filter(cliente => cliente.genero === genero);
     
         clientesDoGenero.forEach(cliente => {
-            cliente.compras.forEach(compra => {
-                if (contadorProdutos[compra.produto]) {
-                    contadorProdutos[compra.produto]++;
+            cliente.getProdutosConsumidos.forEach(produto => {
+                if (contadorProdutos[produto.nome]) {
+                    contadorProdutos[produto.nome]++;
                 } else {
-                    contadorProdutos[compra.produto] = 1;
+                    contadorProdutos[produto.nome] = 1;
+                }
+            });
+            cliente.getServicosConsumidos.forEach(servico => {
+                if (contadorProdutos[servico.nome]) {
+                    contadorProdutos[servico.nome]++;
+                } else {
+                    contadorProdutos[servico.nome] = 1;
                 }
             });
         });

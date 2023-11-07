@@ -22,6 +22,7 @@ while (execucao) {
     console.log(`8 - Listar 10 clientes que menos consumiram produtos ou serviços`);
     console.log(`9 - Listar 5 clientes que mais consumiram em valor`);
     console.log(`10 - Listar clientes por gênero`);
+    console.log(`11 - Listar produtos mais consumidos por gênero`);
     
       
     console.log(`0 - Sair`);
@@ -30,6 +31,9 @@ while (execucao) {
     let opcao = entrada.receberNumero(`Por favor, escolha uma opção: `)
     let listagemProdutos = new ListagemProdutos(produtoscadastrados);
     let listagemClientes = new ListagemClientes(empresa.getClientes, compras);
+    let opcaoGenero: number;
+    let genero: string;
+    
     
 
     switch (opcao) {
@@ -70,8 +74,9 @@ while (execucao) {
         case 10:
             console.log(`1 - Masculino`);
             console.log(`2 - Feminino`);
-            let opcaoGenero = entrada.receberNumero(`Por favor, escolha o gênero que deseja listar: `);
-            let genero = '';
+            opcaoGenero = entrada.receberNumero(`Por favor, escolha o gênero que deseja listar: `);
+            genero = '';
+            
             switch (opcaoGenero) {
                 case 1:
                     genero = 'Masculino';
@@ -85,6 +90,26 @@ while (execucao) {
             }
             if (genero) {
                 listagemClientes.listarClientesPorGenero(genero);
+            }
+            break;
+        case 11:
+            console.log(`1 - Masculino`);
+            console.log(`2 - Feminino`);
+            opcaoGenero = entrada.receberNumero(`Por favor, escolha o gênero que deseja listar: `);
+            genero = '';
+            switch (opcaoGenero) {
+                case 1:
+                    genero = 'Masculino';
+                    break;
+                case 2:
+                    genero = 'Feminino';
+                    break;
+                default:
+                    console.log(`Opção inválida.`);
+                    break;
+            }
+            if (genero) {
+                listagemClientes.listarProdutosMaisConsumidosPorGenero(genero);
             }
             break;
             

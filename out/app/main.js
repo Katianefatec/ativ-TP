@@ -25,11 +25,14 @@ while (execucao) {
     console.log("8 - Listar 10 clientes que menos consumiram produtos ou servi\u00E7os");
     console.log("9 - Listar 5 clientes que mais consumiram em valor");
     console.log("10 - Listar clientes por g\u00EAnero");
+    console.log("11 - Listar produtos mais consumidos por g\u00EAnero");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
     var listagemProdutos = new listagemProdutos_1.default(produtosCadastrados_1.default);
     var listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
+    var opcaoGenero = void 0;
+    var genero = void 0;
     switch (opcao) {
         case 1:
             var cadastro = new cadastroCliente_1.default(empresa.getClientes);
@@ -64,8 +67,8 @@ while (execucao) {
         case 10:
             console.log("1 - Masculino");
             console.log("2 - Feminino");
-            var opcaoGenero = entrada.receberNumero("Por favor, escolha o g\u00EAnero que deseja listar: ");
-            var genero = '';
+            opcaoGenero = entrada.receberNumero("Por favor, escolha o g\u00EAnero que deseja listar: ");
+            genero = '';
             switch (opcaoGenero) {
                 case 1:
                     genero = 'Masculino';
@@ -79,6 +82,26 @@ while (execucao) {
             }
             if (genero) {
                 listagemClientes.listarClientesPorGenero(genero);
+            }
+            break;
+        case 11:
+            console.log("1 - Masculino");
+            console.log("2 - Feminino");
+            opcaoGenero = entrada.receberNumero("Por favor, escolha o g\u00EAnero que deseja listar: ");
+            genero = '';
+            switch (opcaoGenero) {
+                case 1:
+                    genero = 'Masculino';
+                    break;
+                case 2:
+                    genero = 'Feminino';
+                    break;
+                default:
+                    console.log("Op\u00E7\u00E3o inv\u00E1lida.");
+                    break;
+            }
+            if (genero) {
+                listagemClientes.listarProdutosMaisConsumidosPorGenero(genero);
             }
             break;
         case 0:

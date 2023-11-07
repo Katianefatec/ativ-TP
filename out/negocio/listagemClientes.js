@@ -119,12 +119,20 @@ var ListagemClientes = /** @class */ (function (_super) {
         var contadorProdutos = {};
         var clientesDoGenero = this.clientes.filter(function (cliente) { return cliente.genero === genero; });
         clientesDoGenero.forEach(function (cliente) {
-            cliente.compras.forEach(function (compra) {
-                if (contadorProdutos[compra.produto]) {
-                    contadorProdutos[compra.produto]++;
+            cliente.getProdutosConsumidos.forEach(function (produto) {
+                if (contadorProdutos[produto.nome]) {
+                    contadorProdutos[produto.nome]++;
                 }
                 else {
-                    contadorProdutos[compra.produto] = 1;
+                    contadorProdutos[produto.nome] = 1;
+                }
+            });
+            cliente.getServicosConsumidos.forEach(function (servico) {
+                if (contadorProdutos[servico.nome]) {
+                    contadorProdutos[servico.nome]++;
+                }
+                else {
+                    contadorProdutos[servico.nome] = 1;
                 }
             });
         });

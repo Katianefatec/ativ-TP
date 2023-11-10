@@ -6,4 +6,8 @@ export default class Produto {
         this.nome = nome;
         this.valor = valor;
     }
+    public atualizarProduto(novoNome: string, novoValor: number): void {
+        this.nome = novoNome;
+        this.valor = novoValor;
+    }    
 }

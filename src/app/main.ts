@@ -31,6 +31,8 @@ while (execucao) {
     console.log(`11 - Listar produtos mais consumidos por gênero`);
     console.log(`12 - Atualizar cliente`);
     console.log(`13 - Deletar cliente`);
+    console.log(`14 - Atualizar produto`);
+    console.log(`15 - Deletar produto`);
     
     
       
@@ -150,6 +152,38 @@ while (execucao) {
                 console.log("Cliente não encontrado.");
             }
             break;
+                   
+        case 14:
+            console.log("Produtos disponíveis:");
+            listagemProdutos.getProdutos().forEach((produto, index) => {
+                console.log(`${index + 1}. ${produto.nome} - ${produto.valor}`);
+            });
+            let nomeProdutoAtualizar = entrada.receberTexto(`Por favor, informe o nome do produto que deseja atualizar: `);
+            let produto = listagemProdutos.getProdutos().find(p => p.nome === nomeProdutoAtualizar);
+            if (produto) {
+                let novoNome = entrada.receberTexto(`Por favor informe o novo nome do produto: `)
+                let novoValor = entrada.receberNumero(`Por favor informe o novo valor do produto: `);
+                produto.atualizarProduto(novoNome, novoValor);
+            } else {
+                console.log(`Produto não encontrado.`);
+            }
+            break;
+        case 15:
+            console.log("Produtos disponíveis:");
+            listagemProdutos.getProdutos().forEach((produto, index) => {
+                console.log(`${index + 1}. ${produto.nome} - ${produto.valor}`);
+            });
+            let nomeProdutoDeletar = entrada.receberTexto("Por favor, informe o nome do produto que deseja deletar: ");
+            let produtoIndex = listagemProdutos.getProdutos().findIndex(function (p) { return p.nome === nomeProdutoDeletar; });
+            if (produtoIndex !== -1) {
+                listagemProdutos.getProdutos().splice(produtoIndex, 1);
+                console.log("Produto deletado com sucesso.");
+            } else {
+                console.log("Produto não encontrado.");
+            }
+            break; 
+              
+    
         case 0:
             execucao = false;
             break;

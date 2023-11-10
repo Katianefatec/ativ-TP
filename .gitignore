@@ -18,3 +18,5 @@ yarn-error.log*
 
 # Arquivos de teste
 /coverage
+
+/out/

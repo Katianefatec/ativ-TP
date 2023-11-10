@@ -20,29 +20,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var listagem_1 = __importDefault(require("./listagem"));
 var clientesCadastrados_1 = require("./clientesCadastrados");
+var entrada_1 = __importDefault(require("../io/entrada"));
 var ListagemClientes = /** @class */ (function (_super) {
     __extends(ListagemClientes, _super);
     function ListagemClientes(clientes, compras) {
         var _this = _super.call(this) || this;
+        _this.clientes = clientesCadastrados_1.clientescadastrados;
         _this.compras = compras;
-        _this.clientescadastrados = clientesCadastrados_1.clientescadastrados;
+        _this.entrada = new entrada_1.default();
         return _this;
     }
-    Object.defineProperty(ListagemClientes.prototype, "clientes", {
-        get: function () {
-            return this.clientescadastrados;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    ListagemClientes.prototype.adicionarCliente = function (cliente) {
-        clientesCadastrados_1.clientescadastrados.push(cliente);
-    };
-    ListagemClientes.prototype.removerCliente = function (cliente) {
-        var index = this.clientescadastrados.indexOf(cliente);
-        if (index > -1) {
-            this.clientescadastrados.splice(index, 1);
-        }
+    ListagemClientes.prototype.getClientes = function () {
+        return this.clientes;
     };
     ListagemClientes.prototype.listar = function () {
         console.log("\nLista de todos os clientes:");
@@ -160,34 +149,6 @@ var ListagemClientes = /** @class */ (function (_super) {
             var produto = _a[0], contagem = _a[1];
             console.log("Produto: ".concat(produto, ", Quantidade: ").concat(contagem));
         });
-    };
-    ListagemClientes.prototype.atualizarCliente = function (clienteAntigo, clienteNovo) {
-        var index = this.clientes.indexOf(clienteAntigo);
-        if (index > -1) {
-            this.clientes[index] = clienteNovo;
-        }
-    };
-    ListagemClientes.prototype.deletarCliente = function (cliente) {
-        var index = this.clientes.indexOf(cliente);
-        if (index > -1) {
-            this.clientes.splice(index, 1);
-        }
-    };
-    ListagemClientes.prototype.realizarCompra = function (entrada, produtos) {
-        var nomeCliente = entrada.receberTexto("Por favor informe o nome do cliente: ");
-        var cliente = this.clientes.find(function (cliente) { return cliente.nome.toLowerCase() === nomeCliente.toLowerCase(); });
-        if (!cliente) {
-            console.log("Cliente n\u00E3o encontrado.");
-            return;
-        }
-        var nomeProduto = entrada.receberTexto("Por favor informe o nome do produto: ");
-        var produto = produtos.find(function (produto) { return produto.nome.toLowerCase() === nomeProduto.toLowerCase(); });
-        if (!produto) {
-            console.log("Produto n\u00E3o encontrado.");
-            return;
-        }
-        this.compras.push({ cliente: cliente, produto: produto });
-        console.log("Compra realizada com sucesso.");
     };
     return ListagemClientes;
 }(listagem_1.default));

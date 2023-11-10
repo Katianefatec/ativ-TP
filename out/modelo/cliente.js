@@ -12,6 +12,7 @@ var Cliente = /** @class */ (function () {
         this.telefones = [];
         this.produtosConsumidos = [];
         this.servicosConsumidos = [];
+        this.clientes = [];
     }
     Object.defineProperty(Cliente.prototype, "getCpf", {
         get: function () {
@@ -62,6 +63,9 @@ var Cliente = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Cliente.prototype.adicionarCliente = function (cliente) {
+        this.clientes.push(cliente);
+    };
     Cliente.prototype.comprarProduto = function (produto) {
         this.produtosConsumidos.push(produto);
         this.quantidadeConsumida++;
@@ -75,6 +79,12 @@ var Cliente = /** @class */ (function () {
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.genero = genero;
+    };
+    Cliente.prototype.deletarCliente = function (cliente) {
+        var index = this.clientes.indexOf(cliente);
+        if (index > -1) {
+            this.clientes.splice(index, 1);
+        }
     };
     Cliente.prototype.deletarProdutoConsumido = function (produto) {
         var index = this.produtosConsumidos.indexOf(produto);

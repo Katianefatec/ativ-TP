@@ -22,6 +22,7 @@ var entrada_1 = __importDefault(require("../io/entrada"));
 var cliente_1 = __importDefault(require("../modelo/cliente"));
 var cpf_1 = __importDefault(require("../modelo/cpf"));
 var cadastro_1 = __importDefault(require("./cadastro"));
+var clientesCadastrados_1 = require("./clientesCadastrados");
 var CadastroCliente = /** @class */ (function (_super) {
     __extends(CadastroCliente, _super);
     function CadastroCliente(listagemClientes) {
@@ -47,7 +48,7 @@ var CadastroCliente = /** @class */ (function (_super) {
         var dataEmissao = new Date(ano, mes, dia);
         var cpf = new cpf_1.default(valor, dataEmissao);
         var cliente = new cliente_1.default(nome, nomeSocial, cpf, genero);
-        this.listagemClientes.adicionarCliente(cliente);
+        clientesCadastrados_1.clientescadastrados.push(cliente);
         console.log("\nCadastro conclu\u00EDdo :)\n");
     };
     return CadastroCliente;

@@ -5,12 +5,15 @@ import ListagemClientes from "../negocio/listagemClientes";
 import ListagemProdutos from "../negocio/listagemProdutos"; 
 import produtoscadastrados from "../negocio/produtosCadastrados";
 import compras from '../negocio/compra';
+import { clientescadastrados as clientes } from '../negocio/clientesCadastrados'; // Importe os clientes
+import CPF from "../modelo/cpf";
+
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
-let empresa = new Empresa()
+
 let execucao = true
 let listagemProdutos = new ListagemProdutos(produtoscadastrados);
-let listagemClientes = new ListagemClientes(empresa.getClientes, compras);
+let listagemClientes = new ListagemClientes(clientes, compras);
 let cadastro = new CadastroCliente(listagemClientes);
 
 while (execucao) {
@@ -28,7 +31,7 @@ while (execucao) {
     console.log(`11 - Listar produtos mais consumidos por gênero`);
     console.log(`12 - Atualizar cliente`);
     console.log(`13 - Deletar cliente`);
-    console.log(`14 - Realizar compra`);
+    
     
       
     console.log(`0 - Sair`);
@@ -115,32 +118,40 @@ while (execucao) {
             }
             break;
         
-        case 14:
-            let nomeCliente = entrada.receberTexto(`Por favor informe o nome do cliente: `);
-            let cliente = empresa.getClientes.find(c => c.nome === nomeCliente);
-
-        if (!cliente) {
-            console.log(`Cliente não encontrado.`);
+        case 12:
+            let nomeClienteAtualizar= entrada.receberTexto(`Por favor, informe o nome do cliente que deseja atualizar: `);
+            let cliente = listagemClientes.getClientes().find(c => c.nome === nomeClienteAtualizar);
+            if (cliente) {
+                let novoNome = entrada.receberTexto(`Por favor informe o novo nome do cliente: `)
+                let novoNomeSocial = entrada.receberTexto(`Por favor informe o novo nome social do cliente: `)
+                let novoValorCPF = entrada.receberTexto(`Por favor informe o novo número do cpf: `);
+                let novaDataCPF = entrada.receberTexto(`Por favor informe a nova data de emissão do cpf, no padrão dd/mm/yyyy: `);
+                let novoGenero = '';
+                while (novoGenero !== '1' && novoGenero !== '2') {
+                    novoGenero = entrada.receberTexto(`Por favor informe o novo gênero do cliente (1 - Masculino, 2 - Feminino): `)}
+                let partesData = novaDataCPF.split('/')
+                let ano = new Number(partesData[2].valueOf()).valueOf()
+                let mes = new Number(partesData[1].valueOf()).valueOf()
+                let dia = new Number(partesData[0].valueOf()).valueOf()
+                let dataEmissao = new Date(ano, mes, dia)
+                let novoCPF = new CPF(novoValorCPF, dataEmissao);
+                cliente.atualizarCliente(novoNome, novoNomeSocial, novoCPF, novoGenero);
+            } else {
+                console.log(`Cliente não encontrado.`);
+            }
             break;
-        }
-
-        let nomeProduto = entrada.receberTexto(`Por favor informe o nome do produto: `);
-        let produto = produtoscadastrados.find(p => p.nome === nomeProduto);
-
-        if (!produto) {
-            console.log(`Produto não encontrado.`);
+        case 13:
+            let nomeClienteDeletar = entrada.receberTexto("Por favor, informe o nome do cliente que deseja deletar: ");
+            let clienteIndex = listagemClientes.getClientes().findIndex(function (c) { return c.nome === nomeClienteDeletar; });
+            if (clienteIndex !== -1) {
+                listagemClientes.getClientes().splice(clienteIndex, 1);
+                console.log("Cliente deletado com sucesso.");
+            } else {
+                console.log("Cliente não encontrado.");
+            }
             break;
-        }
-
-        compras.push({ cliente: cliente, produto: produto });
-        console.log(`Compra realizada com sucesso.`);
-        break;
-            
         case 0:
-            execucao = false
-            console.log(`Até mais`)
+            execucao = false;
             break;
-        default:
-            console.log(`Operação não entendida :(`)
     }
 }

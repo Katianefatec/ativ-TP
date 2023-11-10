@@ -5,6 +5,7 @@ var Empresa = /** @class */ (function () {
         this.clientes = [];
         this.produtos = [];
         this.servicos = [];
+        this.compras = [];
     }
     Object.defineProperty(Empresa.prototype, "getClientes", {
         get: function () {
@@ -27,15 +28,6 @@ var Empresa = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Empresa.prototype.adicionarCliente = function (cliente) {
-        this.clientes.push(cliente);
-    };
-    Empresa.prototype.removerCliente = function (cliente) {
-        var index = this.clientes.indexOf(cliente);
-        if (index > -1) {
-            this.clientes.splice(index, 1);
-        }
-    };
     return Empresa;
 }());
 exports.default = Empresa;

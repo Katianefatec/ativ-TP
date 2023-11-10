@@ -1,36 +1,29 @@
 import Cliente from "../modelo/cliente";
 import Listagem from "./listagem";
-import compras from '../negocio/compra';
 import Produto from "../modelo/produto";
 import Servico from "../modelo/servico";
-import Entrada from "../io/entrada";
 import { clientescadastrados } from './clientesCadastrados';
+import Entrada from "../io/entrada";
+import compras from '../negocio/compra';
+import CPF from "../modelo/cpf";
 
 export default class ListagemClientes extends Listagem {
     private compras: Array<any>; 
-    private clientescadastrados: Array<Cliente>;
+    private clientes: Array<Cliente>;
+    private entrada: Entrada;
 
-    constructor(clientes: Array<Cliente>, compras: Array<any>) {
+    constructor(clientes: Array<Cliente>, compras: Array<any>) { 
         super();
-        this.compras = compras;
-        this.clientescadastrados = clientescadastrados;
+        this.clientes = clientescadastrados; 
+        this.compras = compras; 
+        this.entrada = new Entrada();
     }
 
-    get clientes() {
-        return this.clientescadastrados;
+    public getClientes(): Cliente[] {
+        return this.clientes;
     }
 
-    public adicionarCliente(cliente: Cliente): void {
-  clientescadastrados.push(cliente);
-}
-
-    public removerCliente(cliente: Cliente): void {
-        const index = this.clientescadastrados.indexOf(cliente);
-        if (index > -1) {
-            this.clientescadastrados.splice(index, 1);
-        }
-    }
-   
+  
     public listar(): void {
         console.log(`\nLista de todos os clientes:`);
         let clientesOrdenados = this.clientes.sort((a, b) => a.nome.localeCompare(b.nome));
@@ -164,45 +157,12 @@ export default class ListagemClientes extends Listagem {
             console.log(`Produto: ${produto}, Quantidade: ${contagem}`);
         });
     }
-
-    public atualizarCliente(clienteAntigo: Cliente, clienteNovo: Cliente): void {
-        const index = this.clientes.indexOf(clienteAntigo);
-        if (index > -1) {
-            this.clientes[index] = clienteNovo;
-        }
-    }
-
-    public deletarCliente(cliente: Cliente): void {
-        const index = this.clientes.indexOf(cliente);
-        if (index > -1) {
-            this.clientes.splice(index, 1);
-        }
-    }
-    
     
 
-    public realizarCompra(entrada: Entrada, produtos: Array<Produto>): void {
-        let nomeCliente = entrada.receberTexto(`Por favor informe o nome do cliente: `);
-        let cliente = this.clientes.find(cliente => cliente.nome.toLowerCase() === nomeCliente.toLowerCase());
     
-        if (!cliente) {
-            console.log(`Cliente não encontrado.`);
-            return;
-        }
-    
-        let nomeProduto = entrada.receberTexto(`Por favor informe o nome do produto: `);
-        let produto = produtos.find(produto => produto.nome.toLowerCase() === nomeProduto.toLowerCase());
-    
-        if (!produto) {
-            console.log(`Produto não encontrado.`);
-            return;
-        }
-    
-        this.compras.push({ cliente: cliente, produto: produto });
-        console.log(`Compra realizada com sucesso.`);
-    }
 }
 
+    
 
 
 

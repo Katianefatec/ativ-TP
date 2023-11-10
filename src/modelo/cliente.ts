@@ -1,3 +1,4 @@
+import { clientescadastrados } from "../negocio/clientesCadastrados"
 import CPF from "./cpf"
 import Produto from "./produto"
 import RG from "./rg"
@@ -15,6 +16,7 @@ export default class Cliente {
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
     public quantidadeConsumida: number = 0;
+    private clientes: Array<Cliente>;
     
     constructor(nome: string, nomeSocial: string, cpf: CPF, genero: string) {
         this.nome = nome;
@@ -26,7 +28,9 @@ export default class Cliente {
         this.telefones = []
         this.produtosConsumidos = []
         this.servicosConsumidos = []
+        this.clientes = []; 
     }
+
     public get getCpf(): CPF {
         return this.cpf
     }
@@ -48,6 +52,10 @@ export default class Cliente {
     public get getQuantidadeConsumida(): number {
         return this.produtosConsumidos.length + this.servicosConsumidos.length;
     }
+
+    public adicionarCliente(cliente: Cliente): void {
+        this.clientes.push(cliente);
+    }
     public comprarProduto(produto: Produto): void {
         this.produtosConsumidos.push(produto);
         this.quantidadeConsumida++;
@@ -62,6 +70,12 @@ export default class Cliente {
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.genero = genero;
+    }
+    public deletarCliente(cliente: Cliente): void {
+        const index = this.clientes.indexOf(cliente);
+        if (index > -1) {
+            this.clientes.splice(index, 1);
+        }
     }
 
     public deletarProdutoConsumido(produto: Produto): void {
@@ -79,7 +93,8 @@ export default class Cliente {
             this.quantidadeConsumida--;
         }
     }
-    
+
+       
 }
 
 

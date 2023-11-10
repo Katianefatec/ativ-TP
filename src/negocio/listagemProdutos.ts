@@ -41,4 +41,8 @@ export default class ListagemProdutos extends Listagem {
         this.listar();
         this.listarServicos();
     }
+
+    public getProdutos(): Produto[] {
+        return this.produto;
+    }
 }

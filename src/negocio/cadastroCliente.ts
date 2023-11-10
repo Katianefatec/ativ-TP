@@ -13,6 +13,7 @@ export default class CadastroCliente extends Cadastro {
         super()
         this.entrada = new Entrada()
         this.listagemClientes = listagemClientes;
+        
     }
     public cadastrar(): void {
         console.log(`\nInício do cadastro do cliente`);

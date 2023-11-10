@@ -37,13 +37,3 @@ let clientescadastrados: Cliente[] = [
 
 export { clientescadastrados };
 
-// import Cliente from "../modelo/cliente";
-// import CPF from "../modelo/cpf";
-
-// let clientes: Cliente[] = []; 
-// for (let i = 1; i <= 30; i++) {
-//     let cpf = new CPF(`CPF ${i}`, new Date());
-//     clientes.push(new Cliente(`Cliente ${i}`, `Nome Social ${i}`, cpf));
-// }
-
-// export default clientes;

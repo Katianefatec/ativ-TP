@@ -18,19 +18,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var clientesCadastrados_1 = __importDefault(require("./clientesCadastrados"));
 var listagem_1 = __importDefault(require("./listagem"));
+var clientesCadastrados_1 = require("./clientesCadastrados");
 var ListagemClientes = /** @class */ (function (_super) {
     __extends(ListagemClientes, _super);
     function ListagemClientes(clientes, compras) {
         var _this = _super.call(this) || this;
-        _this.clientes = clientesCadastrados_1.default;
         _this.compras = compras;
+        _this.clientescadastrados = clientesCadastrados_1.clientescadastrados;
         return _this;
     }
+    Object.defineProperty(ListagemClientes.prototype, "clientes", {
+        get: function () {
+            return this.clientescadastrados;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    ListagemClientes.prototype.adicionarCliente = function (cliente) {
+        clientesCadastrados_1.clientescadastrados.push(cliente);
+    };
+    ListagemClientes.prototype.removerCliente = function (cliente) {
+        var index = this.clientescadastrados.indexOf(cliente);
+        if (index > -1) {
+            this.clientescadastrados.splice(index, 1);
+        }
+    };
     ListagemClientes.prototype.listar = function () {
         console.log("\nLista de todos os clientes:");
-        this.clientes.forEach(function (cliente) {
+        var clientesOrdenados = this.clientes.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
+        clientesOrdenados.forEach(function (cliente) {
             console.log("Nome: ".concat(cliente.nome));
             console.log("Nome social: ".concat(cliente.nomeSocial));
             console.log("CPF: ".concat(cliente.getCpf.getValor));
@@ -108,7 +125,8 @@ var ListagemClientes = /** @class */ (function (_super) {
         console.log("\n");
     };
     ListagemClientes.prototype.listarClientesPorGenero = function (genero) {
-        var clientesDoGenero = this.clientes.filter(function (cliente) { return cliente.genero === genero; });
+        var clientesOrdenados = this.clientes.sort(function (a, b) { return a.nome.localeCompare(b.nome); });
+        var clientesDoGenero = clientesOrdenados.filter(function (cliente) { return cliente.genero === genero; });
         console.log("\nClientes do g\u00EAnero ".concat(genero, ":"));
         clientesDoGenero.forEach(function (cliente, index) {
             console.log("".concat(index + 1, ". Cliente: ").concat(cliente.nome));
@@ -155,8 +173,21 @@ var ListagemClientes = /** @class */ (function (_super) {
             this.clientes.splice(index, 1);
         }
     };
-    ListagemClientes.prototype.adicionarCliente = function (cliente) {
-        this.clientes.push(cliente);
+    ListagemClientes.prototype.realizarCompra = function (entrada, produtos) {
+        var nomeCliente = entrada.receberTexto("Por favor informe o nome do cliente: ");
+        var cliente = this.clientes.find(function (cliente) { return cliente.nome.toLowerCase() === nomeCliente.toLowerCase(); });
+        if (!cliente) {
+            console.log("Cliente n\u00E3o encontrado.");
+            return;
+        }
+        var nomeProduto = entrada.receberTexto("Por favor informe o nome do produto: ");
+        var produto = produtos.find(function (produto) { return produto.nome.toLowerCase() === nomeProduto.toLowerCase(); });
+        if (!produto) {
+            console.log("Produto n\u00E3o encontrado.");
+            return;
+        }
+        this.compras.push({ cliente: cliente, produto: produto });
+        console.log("Compra realizada com sucesso.");
     };
     return ListagemClientes;
 }(listagem_1.default));

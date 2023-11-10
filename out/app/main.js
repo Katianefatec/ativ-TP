@@ -16,7 +16,7 @@ var execucao = true;
 var listagemProdutos = new listagemProdutos_1.default(produtosCadastrados_1.default);
 var listagemClientes = new listagemClientes_1.default(empresa.getClientes, compra_1.default);
 var cadastro = new cadastroCliente_1.default(listagemClientes);
-while (execucao) {
+var _loop_1 = function () {
     console.log("Op\u00E7\u00F5es:");
     console.log("1 - Cadastrar cliente");
     console.log("2 - Listar todos os clientes");
@@ -31,6 +31,7 @@ while (execucao) {
     console.log("11 - Listar produtos mais consumidos por g\u00EAnero");
     console.log("12 - Atualizar cliente");
     console.log("13 - Deletar cliente");
+    console.log("14 - Realizar compra");
     console.log("0 - Sair");
     var entrada = new entrada_1.default();
     var opcao = entrada.receberNumero("Por favor, escolha uma op\u00E7\u00E3o: ");
@@ -104,6 +105,22 @@ while (execucao) {
                 listagemClientes.listarProdutosMaisConsumidosPorGenero(genero);
             }
             break;
+        case 14:
+            var nomeCliente_1 = entrada.receberTexto("Por favor informe o nome do cliente: ");
+            var cliente = empresa.getClientes.find(function (c) { return c.nome === nomeCliente_1; });
+            if (!cliente) {
+                console.log("Cliente n\u00E3o encontrado.");
+                break;
+            }
+            var nomeProduto_1 = entrada.receberTexto("Por favor informe o nome do produto: ");
+            var produto = produtosCadastrados_1.default.find(function (p) { return p.nome === nomeProduto_1; });
+            if (!produto) {
+                console.log("Produto n\u00E3o encontrado.");
+                break;
+            }
+            compra_1.default.push({ cliente: cliente, produto: produto });
+            console.log("Compra realizada com sucesso.");
+            break;
         case 0:
             execucao = false;
             console.log("At\u00E9 mais");
@@ -111,4 +128,7 @@ while (execucao) {
         default:
             console.log("Opera\u00E7\u00E3o n\u00E3o entendida :(");
     }
+};
+while (execucao) {
+    _loop_1();
 }

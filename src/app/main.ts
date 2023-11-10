@@ -28,6 +28,7 @@ while (execucao) {
     console.log(`11 - Listar produtos mais consumidos por gênero`);
     console.log(`12 - Atualizar cliente`);
     console.log(`13 - Deletar cliente`);
+    console.log(`14 - Realizar compra`);
     
       
     console.log(`0 - Sair`);
@@ -113,6 +114,27 @@ while (execucao) {
                 listagemClientes.listarProdutosMaisConsumidosPorGenero(genero);
             }
             break;
+        
+        case 14:
+            let nomeCliente = entrada.receberTexto(`Por favor informe o nome do cliente: `);
+            let cliente = empresa.getClientes.find(c => c.nome === nomeCliente);
+
+        if (!cliente) {
+            console.log(`Cliente não encontrado.`);
+            break;
+        }
+
+        let nomeProduto = entrada.receberTexto(`Por favor informe o nome do produto: `);
+        let produto = produtoscadastrados.find(p => p.nome === nomeProduto);
+
+        if (!produto) {
+            console.log(`Produto não encontrado.`);
+            break;
+        }
+
+        compras.push({ cliente: cliente, produto: produto });
+        console.log(`Compra realizada com sucesso.`);
+        break;
             
         case 0:
             execucao = false

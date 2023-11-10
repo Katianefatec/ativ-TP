@@ -1,7 +1,7 @@
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
 
-const clientescadastrados = [
+let clientescadastrados: Cliente[] = [
   new Cliente("João", "Jonh", new CPF("22222222222", new Date()), "Masculino"),
   new Cliente("Maria", "Mary", new CPF("33333333333", new Date()), "Feminino"),
   new Cliente("Pedro", "Pedro", new CPF("44444444444", new Date()), "Masculino"),
@@ -35,7 +35,7 @@ const clientescadastrados = [
   new Cliente("Fabio", "Fab", new CPF("34343434343", new Date()), "Masculino"),
 ];
 
-export default clientescadastrados;
+export { clientescadastrados };
 
 // import Cliente from "../modelo/cliente";
 // import CPF from "../modelo/cpf";

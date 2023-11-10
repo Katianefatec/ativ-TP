@@ -20,5 +20,16 @@ export default class Empresa{
     public get getServicos(): Array<Servico>{
         return this.servicos
     }
+
+    public adicionarCliente(cliente: Cliente): void {
+        this.clientes.push(cliente);
+    }
+
+    public removerCliente(cliente: Cliente): void {
+        const index = this.clientes.indexOf(cliente);
+        if (index > -1) {
+            this.clientes.splice(index, 1);
+        }
+    }
     
 }

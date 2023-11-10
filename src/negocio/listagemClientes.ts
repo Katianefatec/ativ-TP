@@ -1,29 +1,48 @@
 import Cliente from "../modelo/cliente";
-import clientescadastrados from "./clientesCadastrados";
 import Listagem from "./listagem";
 import compras from '../negocio/compra';
 import Produto from "../modelo/produto";
 import Servico from "../modelo/servico";
+import Entrada from "../io/entrada";
+import { clientescadastrados } from './clientesCadastrados';
 
 export default class ListagemClientes extends Listagem {
-    private clientes: Array<Cliente>;
     private compras: Array<any>; 
+    private clientescadastrados: Array<Cliente>;
 
     constructor(clientes: Array<Cliente>, compras: Array<any>) {
         super();
-        this.clientes = clientescadastrados;
         this.compras = compras;
+        this.clientescadastrados = clientescadastrados;
     }
+
+    get clientes() {
+        return this.clientescadastrados;
+    }
+
+    public adicionarCliente(cliente: Cliente): void {
+  clientescadastrados.push(cliente);
+}
+
+    public removerCliente(cliente: Cliente): void {
+        const index = this.clientescadastrados.indexOf(cliente);
+        if (index > -1) {
+            this.clientescadastrados.splice(index, 1);
+        }
+    }
+   
     public listar(): void {
         console.log(`\nLista de todos os clientes:`);
-        this.clientes.forEach((cliente) => {
+        let clientesOrdenados = this.clientes.sort((a, b) => a.nome.localeCompare(b.nome));
+
+        clientesOrdenados.forEach((cliente) => {
             console.log(`Nome: ${cliente.nome}`);
             console.log(`Nome social: ${cliente.nomeSocial}`);
             console.log(`CPF: ${cliente.getCpf.getValor}`);
             console.log(`--------------------------------------`);
         });
         console.log(`\n`);
-    }
+}
     public listarTop10Clientes(): void {
         let consumoClientes = new Map<Cliente, number>();
 
@@ -108,7 +127,8 @@ export default class ListagemClientes extends Listagem {
     }
 
     public listarClientesPorGenero(genero: string): void {
-        let clientesDoGenero = this.clientes.filter(cliente => cliente.genero === genero);
+        let clientesOrdenados = this.clientes.sort((a, b) => a.nome.localeCompare(b.nome));
+        let clientesDoGenero = clientesOrdenados.filter(cliente => cliente.genero === genero);
     
         console.log(`\nClientes do gênero ${genero}:`);
         clientesDoGenero.forEach((cliente, index) => {
@@ -159,10 +179,31 @@ export default class ListagemClientes extends Listagem {
         }
     }
     
-    public adicionarCliente(cliente: Cliente): void {
-        this.clientes.push(cliente);
-    }    
+    
+
+    public realizarCompra(entrada: Entrada, produtos: Array<Produto>): void {
+        let nomeCliente = entrada.receberTexto(`Por favor informe o nome do cliente: `);
+        let cliente = this.clientes.find(cliente => cliente.nome.toLowerCase() === nomeCliente.toLowerCase());
+    
+        if (!cliente) {
+            console.log(`Cliente não encontrado.`);
+            return;
+        }
+    
+        let nomeProduto = entrada.receberTexto(`Por favor informe o nome do produto: `);
+        let produto = produtos.find(produto => produto.nome.toLowerCase() === nomeProduto.toLowerCase());
+    
+        if (!produto) {
+            console.log(`Produto não encontrado.`);
+            return;
+        }
+    
+        this.compras.push({ cliente: cliente, produto: produto });
+        console.log(`Compra realizada com sucesso.`);
+    }
 }
+
+
 
 
     

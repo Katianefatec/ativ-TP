@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.clientescadastrados = void 0;
 var cliente_1 = __importDefault(require("../modelo/cliente"));
 var cpf_1 = __importDefault(require("../modelo/cpf"));
 var clientescadastrados = [
@@ -38,7 +39,7 @@ var clientescadastrados = [
     new cliente_1.default("Henrique", "Hen", new cpf_1.default("33333333335", new Date()), "Masculino"),
     new cliente_1.default("Fabio", "Fab", new cpf_1.default("34343434343", new Date()), "Masculino"),
 ];
-exports.default = clientescadastrados;
+exports.clientescadastrados = clientescadastrados;
 // import Cliente from "../modelo/cliente";
 // import CPF from "../modelo/cpf";
 // let clientes: Cliente[] = []; 

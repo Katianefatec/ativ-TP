@@ -2,7 +2,7 @@ import Entrada from "../io/entrada";
 import Cliente from "../modelo/cliente";
 import CPF from "../modelo/cpf";
 import Cadastro from "./cadastro";
-import clientescadastrados from "./clientesCadastrados";
+import { clientescadastrados } from "./clientesCadastrados";
 import ListagemClientes from '../negocio/listagemClientes';
 
 export default class CadastroCliente extends Cadastro {

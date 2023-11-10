@@ -1,0 +1,20 @@
+# Dependências
+/node_modules
+
+# Arquivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretório de saída da compilação
+/dist
+
+# Arquivos de cache do editor
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.tsrc
+
+# Arquivos de teste
+/coverage

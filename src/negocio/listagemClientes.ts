@@ -78,6 +78,10 @@ export default class ListagemClientes extends Listagem {
     public listarMenosConsumidores(): void {
         let consumoClientes = new Map<Cliente, number>();
     
+        this.clientes.forEach(cliente => {
+            consumoClientes.set(cliente, 0);
+        });
+            
         this.compras.forEach(compra => {
             let cliente = compra.cliente;
             let quantidade = consumoClientes.get(cliente) || 0;
@@ -94,7 +98,6 @@ export default class ListagemClientes extends Listagem {
         });
         console.log(`\n`);
     }
-
     public listarTop5ClientesPorValor(): void {
         let valorConsumidoClientes = new Map<Cliente, number>();
     

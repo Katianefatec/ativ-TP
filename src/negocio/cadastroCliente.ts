@@ -7,7 +7,7 @@ import ListagemClientes from '../negocio/listagemClientes';
 
 export default class CadastroCliente extends Cadastro {
     private entrada: Entrada
-    private listagemClientes : ListagemClientes
+    public listagemClientes : ListagemClientes
 
     constructor(listagemClientes: ListagemClientes) {
         super()
@@ -23,6 +23,7 @@ export default class CadastroCliente extends Cadastro {
         let genero = '';
             while (genero !== '1' && genero !== '2') {
         genero = this.entrada.receberTexto(`Por favor informe o gênero do cliente (1 - Masculino, 2 - Feminino): `)}
+        genero = genero === '1' ? 'Masculino' : 'Feminino';
         let partesData = data.split('/')
         let ano = new Number(partesData[2].valueOf()).valueOf()
         let mes = new Number(partesData[1].valueOf()).valueOf()

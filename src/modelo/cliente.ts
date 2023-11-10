@@ -13,10 +13,10 @@ export default class Cliente {
     private rgs: Array<RG>
     private dataCadastro: Date
     private telefones: Array<Telefone>
-    private produtosConsumidos: Array<Produto>
-    private servicosConsumidos: Array<Servico>
+    public produtosConsumidos: Array<Produto>
+    public servicosConsumidos: Array<Servico>
     public quantidadeConsumida: number = 0;
-    private clientes: Array<Cliente>;
+    public clientes: Array<Cliente>;
     
     constructor(nome: string, nomeSocial: string, cpf: CPF, genero: string) {
         this.nome = nome;

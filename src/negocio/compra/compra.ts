@@ -1,8 +1,6 @@
-import Cliente from '../modelo/cliente';
-import Produto from '../modelo/produto';
-import { clientescadastrados } from './clientesCadastrados';
-import produtosCadastrados from './produtosCadastrados';
-import servicosCadastrados from './servicosCadastrados';
+import { clientescadastrados } from '../cliente/clientesCadastrados';
+import produtosCadastrados from '../produto/produtosCadastrados';
+import servicosCadastrados from '../produto/servicosCadastrados';
 
 let compras = [
     { cliente: clientescadastrados[0], produto: produtosCadastrados[0] },
@@ -55,9 +53,9 @@ let compras = [
 
 compras.forEach(compra => {
     if (compra.produto) {
-        compra.cliente.comprarProduto(compra.produto);
+        compra.produto.comprarProduto(compra.produto);
     } else if (compra.servico) {
-        compra.cliente.contratarServico(compra.servico);
+        compra.servico.contratarServico(compra.servico);
     }
 });
 

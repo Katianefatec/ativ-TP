@@ -1,4 +1,4 @@
-import Produto from "../modelo/produto";
+import Produto from "../../modelo/produto";
 
 const produto = [
     new Produto("Shampoo", 100),

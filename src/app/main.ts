@@ -1,12 +1,12 @@
 import Entrada from "../io/entrada";
-import Empresa from "../modelo/empresa"
-import CadastroCliente from "../negocio/cadastroCliente";
-import ListagemClientes from "../negocio/listagemClientes";
-import ListagemProdutos from "../negocio/listagemProdutos"; 
-import produtoscadastrados from "../negocio/produtosCadastrados";
-import compras from '../negocio/compra';
-import { clientescadastrados as clientes } from '../negocio/clientesCadastrados'; // Importe os clientes
 import CPF from "../modelo/cpf";
+import Telefone from "../modelo/telefone";
+import CadastroCliente from "../negocio/cliente/cadastroCliente";
+import { clientescadastrados as clientes } from '../negocio/cliente/clientesCadastrados'; // Importe os clientes
+import ListagemClientes from "../negocio/cliente/listagemClientes";
+import compras from '../negocio/compra/compra';
+import ListagemProdutos from "../negocio/produto/listagemProdutos";
+import produtoscadastrados from "../negocio/produto/produtosCadastrados";
 
 
 console.log(`Bem-vindo ao cadastro de clientes do Grupo World Beauty`)
@@ -67,7 +67,7 @@ while (execucao) {
             listagemClientes.listarTop10Clientes();
             break;   
         case 7:
-            listagemClientes.listarMaisConsumidos();
+            listagemProdutos.listarMaisConsumidos();
             break;    
         
             case 8:
@@ -116,7 +116,7 @@ while (execucao) {
                     break;
             }
             if (genero) {
-                listagemClientes.listarProdutosMaisConsumidosPorGenero(genero);
+                listagemProdutos.listarProdutosMaisConsumidosPorGenero(genero);
             }
             break;
         
@@ -137,7 +137,10 @@ while (execucao) {
                 let dia = new Number(partesData[0].valueOf()).valueOf()
                 let dataEmissao = new Date(ano, mes, dia)
                 let novoCPF = new CPF(novoValorCPF, dataEmissao);
-                cliente.atualizarCliente(novoNome, novoNomeSocial, novoCPF, novoGenero);
+                let novoDDD = entrada.receberTexto(`Por favor informe o novo DDD do telefone do cliente: `);
+                let novoNumero = entrada.receberTexto(`Por favor informe o novo número do telefone do cliente: `);
+                let novoTelefone = new Telefone(novoDDD, novoNumero);
+                cliente.atualizarCliente(novoNome, novoNomeSocial, novoCPF, novoGenero, novoTelefone);
             } else {
                 console.log(`Cliente não encontrado.`);
             }

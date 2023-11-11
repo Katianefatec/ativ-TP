@@ -1,4 +1,4 @@
-import Servico from "../modelo/servico";
+import Servico from "../../modelo/servico";
 
 const servicosCadastrados = [
     new Servico("Corte de cabelo feminino", 80),

@@ -1,4 +1,3 @@
-import { clientescadastrados } from "../negocio/clientesCadastrados"
 import CPF from "./cpf"
 import Produto from "./produto"
 import RG from "./rg"
@@ -18,17 +17,19 @@ export default class Cliente {
     public quantidadeConsumida: number = 0;
     public clientes: Array<Cliente>;
     
-    constructor(nome: string, nomeSocial: string, cpf: CPF, genero: string) {
+    
+    constructor(nome: string, nomeSocial: string, cpf: CPF, genero: string, telefone: Telefone) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.genero = genero;
         this.rgs = []
         this.dataCadastro = new Date()
-        this.telefones = []
+        this.telefones = [telefone]; 
         this.produtosConsumidos = []
         this.servicosConsumidos = []
         this.clientes = []; 
+        
     }
 
     public get getCpf(): CPF {
@@ -53,23 +54,21 @@ export default class Cliente {
         return this.produtosConsumidos.length + this.servicosConsumidos.length;
     }
 
+    public adicionarTelefone(telefone: Telefone): void {
+        this.telefones.push(telefone);
+    }
+
     public adicionarCliente(cliente: Cliente): void {
         this.clientes.push(cliente);
     }
-    public comprarProduto(produto: Produto): void {
-        this.produtosConsumidos.push(produto);
-        this.quantidadeConsumida++;
-    }
-    public contratarServico(servico: Servico): void {
-        this.servicosConsumidos.push(servico);
-        this.quantidadeConsumida++;
-    }
+    
 
-    public atualizarCliente(nome: string, nomeSocial: string, cpf: CPF, genero: string): void {
+    public atualizarCliente(nome: string, nomeSocial: string, cpf: CPF, genero: string, telefone: Telefone): void {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.genero = genero;
+        this.adicionarTelefone(telefone); 
     }
     public deletarCliente(cliente: Cliente): void {
         const index = this.clientes.indexOf(cliente);
@@ -78,21 +77,7 @@ export default class Cliente {
         }
     }
 
-    public deletarProdutoConsumido(produto: Produto): void {
-        const index = this.produtosConsumidos.indexOf(produto);
-        if (index > -1) {
-            this.produtosConsumidos.splice(index, 1);
-            this.quantidadeConsumida--;
-        }
-    }
-
-    public deletarServicoConsumido(servico: Servico): void {
-        const index = this.servicosConsumidos.indexOf(servico);
-        if (index > -1) {
-            this.servicosConsumidos.splice(index, 1);
-            this.quantidadeConsumida--;
-        }
-    }
+    
 
        
 }

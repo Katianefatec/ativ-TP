@@ -5,6 +5,9 @@ import { clientescadastrados } from './clientesCadastrados';
 
 
 export default class ListagemClientes extends Listagem {
+    listarClientes() {
+        throw new Error("Method not implemented.");
+    }
     private compras: Array<any>; 
     private clientes: Array<Cliente>;
     

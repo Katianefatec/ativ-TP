@@ -31,13 +31,19 @@ export default class CadastroCliente extends Cadastro {
         let mes = new Number(partesData[1].valueOf()).valueOf()
         let dia = new Number(partesData[0].valueOf()).valueOf()
         let dataEmissao = new Date(ano, mes, dia)
-        let cpf = new CPF(valor, dataEmissao);
+        let cpf = new CPF(valor, dataEmissao); 
+        let cpfExistente = clientescadastrados.find(cliente => cliente.getCpf.getValor === cpf.getValor);
+        if (cpfExistente) {
+            console.log(`\n Já existe um cliente cadastrado com o CPF ${cpf.getValor}.\n`);
+            return;
+        }
         let ddd = this.entrada.receberTexto(`Por favor informe o DDD do telefone do cliente: `);
         let numero = this.entrada.receberTexto(`Por favor informe o número do telefone do cliente: `);
         let telefone = new Telefone(ddd, numero);
 
         let cliente = new Cliente(nome, nomeSocial, cpf, genero, telefone);
         clientescadastrados.push(cliente);        
+
         console.log(`\nCadastro concluído :)\n`);
     }
 }

@@ -2,8 +2,8 @@ import Entrada from "../io/entrada";
 import { clientescadastrados as clientes } from './cliente/clientesCadastrados';
 import ListagemClientes from "./cliente/listagemClientes";
 import compras from './compra/compra';
-import ListagemProdutos from "./produto/listagemProdutos";
-import produtoscadastrados from "./produto/produtosCadastrados";
+import ListagemProdutos from "./produtosEservicos/listagemProdutosEServicos";
+import produtoscadastrados from "./produtosEservicos/produtosCadastrados";
 
 export default function menuRelatorios() {
     let execucaoRelatorios = true;
@@ -16,7 +16,7 @@ while (execucaoRelatorios) {
     console.log(`1 - Listar top 10 clientes que mais consumiram produtos ou serviços`);
     console.log(`2 - Listar clientes por gênero`);
     console.log(`3 - Listar produtos e serviços mais consumidos`);
-    console.log(`4 - Listar produtos mais consumidos por gênero`); 
+    console.log(`4 - Listar produtos e serviços mais consumidos por gênero`); 
     console.log(`5 - Listar 5 clientes que mais consumiram em valor`);  
     console.log(`6 - Listar 10 clientes que menos consumiram produtos ou serviços`);  
           
@@ -78,7 +78,7 @@ while (execucaoRelatorios) {
                     break;
             }
             if (genero) {
-                listagemProdutos.listarProdutosMaisConsumidosPorGenero(genero);
+                listagemProdutos.listarProdutosEServicosMaisConsumidosPorGenero(genero);
             }
             
             break;    

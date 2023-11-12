@@ -1,6 +1,6 @@
 import { clientescadastrados } from '../cliente/clientesCadastrados';
-import produtosCadastrados from '../produto/produtosCadastrados';
-import servicosCadastrados from '../produto/servicosCadastrados';
+import produtosCadastrados from '../produtosEservicos/produtosCadastrados';
+import servicosCadastrados from '../produtosEservicos/servicosCadastrados';
 
 let compras = [
     { cliente: clientescadastrados[0], produto: produtosCadastrados[0] },

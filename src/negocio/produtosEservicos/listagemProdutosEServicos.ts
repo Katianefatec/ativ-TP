@@ -24,9 +24,16 @@ export default class ListagemProdutos extends Listagem {
 
     public getProdutos(): Produto[] {
         return this.produto;
-    }    
+    }  
+    
+    public getServicos(): Servico[] {
+        return this.servico;
+    }
     public adicionarProduto(produto: Produto): void {
         this.produto.push(produto);
+    }
+    public adicionarServico(servico: Servico): void {
+        this.servico.push(servico);
     }
     public listar(): void {
         console.log(`\nLista de todos os produtos:`);
@@ -73,26 +80,26 @@ export default class ListagemProdutos extends Listagem {
         console.log(`\n`);
     }
 
-    public listarProdutosMaisConsumidosPorGenero(genero: string): void {
-        let contadorProdutos: { [produto: string]: number } = {};
+    public listarProdutosEServicosMaisConsumidosPorGenero(genero: string): void {
+        let contadorProdutosServicos: { [nome: string]: number } = {};
         let comprasDoGenero = compras.filter(compra => compra.cliente.genero === genero);
     
         comprasDoGenero.forEach(compra => {
-            let produto = compra.produto;
-            if (produto) {
-                if (contadorProdutos[produto.nome]) {
-                    contadorProdutos[produto.nome]++;
+            let produtoServico = compra.produto || compra.servico;
+            if (produtoServico) {
+                if (contadorProdutosServicos[produtoServico.nome]) {
+                    contadorProdutosServicos[produtoServico.nome]++;
                 } else {
-                    contadorProdutos[produto.nome] = 1;
+                    contadorProdutosServicos[produtoServico.nome] = 1;
                 }
             }
         });
     
-        let produtosOrdenados = Object.entries(contadorProdutos).sort((a, b) => b[1] - a[1]);
+        let produtosServicosOrdenados = Object.entries(contadorProdutosServicos).sort((a, b) => b[1] - a[1]);
     
-        console.log(`\nProdutos mais consumidos por clientes do gênero ${genero}:`);
-        produtosOrdenados.forEach(([produto, contagem]) => {
-            console.log(`Produto: ${produto}, Quantidade: ${contagem}`);
+        console.log(`\nProdutos e serviços mais consumidos por clientes do gênero ${genero}:`);
+        produtosServicosOrdenados.forEach(([nome, contagem]) => {
+            console.log(`Nome: ${nome}, Quantidade: ${contagem}`);
         });
     }
    

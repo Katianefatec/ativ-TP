@@ -18,8 +18,7 @@ export default class Produto {
         this.valor = novoValor;
         
     }    
-    public comprarProduto(produto: Produto): void {
-        this.produtosConsumidos.push(produto);
+    public comprarProduto(): void {
         this.quantidadeConsumida++;
     }
     

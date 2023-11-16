@@ -1,13 +1,13 @@
 import Entrada from "../io/entrada";
 import { clientescadastrados as clientes } from './cliente/clientesCadastrados';
 import ListagemClientes from "./cliente/listagemClientes";
-import compras from './compra/compra';
+import compras from './compra/listaCompras';
 import ListagemProdutos from "./produtosEservicos/listagemProdutosEServicos";
 import produtoscadastrados from "./produtosEservicos/produtosCadastrados";
 
 export default function menuRelatorios() {
     let execucaoRelatorios = true;
-    let listagemProdutos = new ListagemProdutos(produtoscadastrados);
+    let listagemProdutos = new ListagemProdutos();
     let listagemClientes = new ListagemClientes(clientes, compras);
         
 

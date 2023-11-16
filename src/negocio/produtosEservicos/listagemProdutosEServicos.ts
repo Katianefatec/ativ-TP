@@ -2,7 +2,7 @@ import Cliente from "../../modelo/cliente";
 import Produto from "../../modelo/produto";
 import Servico from "../../modelo/servico";
 import { clientescadastrados } from "../cliente/clientesCadastrados";
-import compras from '../compra/compra';
+import compras from '../compra/listaCompras';
 import Listagem from "../listagem";
 import produtoscadastrados from "./produtosCadastrados";
 import servicosCadastrados from "./servicosCadastrados";
@@ -10,16 +10,14 @@ import servicosCadastrados from "./servicosCadastrados";
 export default class ListagemProdutos extends Listagem {
     private produto: Array<Produto>
     private servico: Array<Servico>
-    private clientes: Array<Cliente>;
     private compras: Array<any>;
     
     
-    constructor(produto: Array<Produto>) {
+    constructor() {
         super()
         this.produto = produtoscadastrados;
         this.servico = servicosCadastrados;
         this.compras = compras; 
-        this.clientes = clientescadastrados;
     }
 
     public getProdutos(): Produto[] {
@@ -100,6 +98,16 @@ export default class ListagemProdutos extends Listagem {
         console.log(`\nProdutos e serviços mais consumidos por clientes do gênero ${genero}:`);
         produtosServicosOrdenados.forEach(([nome, contagem]) => {
             console.log(`Nome: ${nome}, Quantidade: ${contagem}`);
+        });
+    }
+
+    public listarCompras(): void {
+        console.log("Lista de Compras:");
+        this.compras.forEach((compra, index) => {
+            console.log(`Compra ${index + 1}:`);
+            console.log(`Cliente: ${compra.cliente.nome}`);
+            console.log(`Produto: ${compra.produto ? compra.produto.nome : 'Nenhum'}`);
+            console.log(`Serviço: ${compra.servico ? compra.servico.nome : 'Nenhum'}`);
         });
     }
    

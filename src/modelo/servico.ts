@@ -10,8 +10,7 @@ export default class Servico {
         this.servicosConsumidos = [];
     }
 
-    public contratarServico(servico: Servico): void {
-        this.servicosConsumidos.push(servico);
+    public contratarServico(): void {
         this.quantidadeConsumida++;
     }
 }

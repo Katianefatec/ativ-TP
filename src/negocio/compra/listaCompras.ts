@@ -2,7 +2,14 @@ import { clientescadastrados } from '../cliente/clientesCadastrados';
 import produtosCadastrados from '../produtosEservicos/produtosCadastrados';
 import servicosCadastrados from '../produtosEservicos/servicosCadastrados';
 
-let compras = [
+
+interface Compra {
+    cliente: typeof clientescadastrados[0];
+    produto?: typeof produtosCadastrados[0];
+    servico?: typeof servicosCadastrados[0];
+}
+
+let compras: Compra[] = [
     { cliente: clientescadastrados[0], produto: produtosCadastrados[0] },
     { cliente: clientescadastrados[1], produto: produtosCadastrados[1] },
     { cliente: clientescadastrados[2], produto: produtosCadastrados[2] },
@@ -51,11 +58,13 @@ let compras = [
 ];
 
 
+
+
 compras.forEach(compra => {
     if (compra.produto) {
-        compra.produto.comprarProduto(compra.produto);
+        compra.produto.comprarProduto();
     } else if (compra.servico) {
-        compra.servico.contratarServico(compra.servico);
+        compra.servico.contratarServico();
     }
 });
 

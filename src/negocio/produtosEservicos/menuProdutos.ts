@@ -3,14 +3,14 @@ import Produto from "../../modelo/produto";
 import CadastroCliente from "../cliente/cadastroCliente";
 import { clientescadastrados as clientes } from '../cliente/clientesCadastrados';
 import ListagemClientes from "../cliente/listagemClientes";
-import compras from '../compra/compra';
+import compras from '../compra/listaCompras';
 import ListagemProdutos from "./listagemProdutosEServicos";
 import produtoscadastrados from "./produtosCadastrados";
 
 export default function menuProdutos() {
     let execucaoProdutos = true;
     let entrada = new Entrada();
-    let listagemProdutos = new ListagemProdutos(produtoscadastrados);
+    let listagemProdutos = new ListagemProdutos();
     let listagemClientes = new ListagemClientes(clientes, compras);
     let cadastro = new CadastroCliente(listagemClientes);
     let produto;

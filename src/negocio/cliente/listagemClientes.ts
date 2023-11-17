@@ -32,6 +32,9 @@ export default class ListagemClientes extends Listagem {
             console.log(`Nome: ${cliente.nome}`);
             console.log(`Nome social: ${cliente.nomeSocial}`);
             console.log(`CPF: ${cliente.getCpf.getValor}`);
+            cliente.getRgs.forEach(rg => {
+                console.log(`RG: ${rg.getValor}`);
+            });
             console.log(`Gênero: ${cliente.genero}`);
             console.log(`Data de cadastro: ${cliente.getDataCadastro.toLocaleDateString()}`);
             console.log(`Telefones: ${cliente.getTelefones.map(telefone => `(${telefone.getDdd}) ${telefone.getNumero}`).join(', ')}`);

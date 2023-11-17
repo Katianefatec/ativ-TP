@@ -9,7 +9,7 @@ export default class Cliente {
     public nomeSocial: string
     public genero: string;
     private cpf: CPF
-    private rgs: Array<RG>
+    private rg: Array<RG>
     private dataCadastro: Date
     private telefones: Array<Telefone>
     public produtosConsumidos: Array<Produto>
@@ -18,25 +18,39 @@ export default class Cliente {
     public clientes: Array<Cliente>;
     
     
-    constructor(nome: string, nomeSocial: string, cpf: CPF, genero: string, telefone: Telefone) {
+    constructor(nome: string, nomeSocial: string, cpf: CPF, rg: RG, genero: string, telefone: Telefone) {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
         this.cpf = cpf;
         this.genero = genero;
-        this.rgs = []
+        this.rg = [rg]; 
         this.dataCadastro = new Date()
         this.telefones = [telefone]; 
         this.produtosConsumidos = []
         this.servicosConsumidos = []
         this.clientes = []; 
-        
+                
+    }
+
+    getNome(): string {
+        return this.nome;
+    }
+
+    getNomeSocial(): string {
+        return this.nomeSocial;
+    }
+    
+    getGenero(): string {
+        return this.genero;
     }
 
     public get getCpf(): CPF {
         return this.cpf
     }
+
+    
     public get getRgs(): Array<RG> {
-        return this.rgs
+        return this.rg
     }
     public get getDataCadastro(): Date {
         return this.dataCadastro
@@ -54,6 +68,18 @@ export default class Cliente {
         return this.produtosConsumidos.length + this.servicosConsumidos.length;
     }
 
+    public setCpf(cpf: CPF): void {
+        this.cpf = cpf;
+    }
+    
+    public setRg(rg: RG): void {
+        this.rg.push(rg);
+    }
+    
+    public setTelefone(telefone: Telefone): void {
+        this.telefones.push(telefone);
+    }
+
     public adicionarTelefone(telefone: Telefone): void {
         this.telefones.push(telefone);
     }
@@ -63,21 +89,20 @@ export default class Cliente {
     }
     
 
-    public atualizarCliente(nome: string, nomeSocial: string, cpf: CPF, genero: string, telefone: Telefone): void {
+    public atualizarCliente(nome: string, nomeSocial: string, cpf: CPF, rg: RG, genero: string, telefone: Telefone): void {
         this.nome = nome;
         this.nomeSocial = nomeSocial;
-        this.cpf = cpf;
+        this.cpf = cpf;        
         this.genero = genero;
         this.adicionarTelefone(telefone); 
+        this.rg = [rg];
     }
     public deletarCliente(cliente: Cliente): void {
         const index = this.clientes.indexOf(cliente);
         if (index > -1) {
             this.clientes.splice(index, 1);
         }
-    }
-
-    
+    }  
 
        
 }
